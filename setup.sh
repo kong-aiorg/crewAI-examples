@@ -8,9 +8,9 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Default configurations
-MIN_PYTHON_VERSION="3.9"
-MAX_PYTHON_VERSION="3.13"
-REQUIRED_PYTHON_VERSION="^3.9"
+MIN_PYTHON_VERSION="3.12"
+MAX_PYTHON_VERSION="3.13.1"
+REQUIRED_PYTHON_VERSION="^3.12"
 DEBUG=${DEBUG:-false}
 
 # Function to print debug messages
@@ -194,95 +194,95 @@ create_project_structure() {
     success "Project structure created"
 }
 
-# Backup existing configuration
-backup_existing_config() {
-    local timestamp=$(date +%Y%m%d_%H%M%S)
-    local backup_dir="backup_$timestamp"
+# # Backup existing configuration
+# backup_existing_config() {
+#     local timestamp=$(date +%Y%m%d_%H%M%S)
+#     local backup_dir="backup_$timestamp"
     
-    if [ -f "config/agents.yaml" ] || [ -f "config/tasks.yaml" ] || [ -f ".env" ]; then
-        info "Backing up existing configuration..."
-        mkdir -p "$backup_dir"
-        cp config/*.yaml "$backup_dir/" 2>/dev/null
-        cp .env "$backup_dir/" 2>/dev/null
-        success "Backup created in $backup_dir"
-    fi
-}
+#     if [ -f "config/agents.yaml" ] || [ -f "config/tasks.yaml" ] || [ -f ".env" ]; then
+#         info "Backing up existing configuration..."
+#         mkdir -p "$backup_dir"
+#         cp config/*.yaml "$backup_dir/" 2>/dev/null
+#         cp .env "$backup_dir/" 2>/dev/null
+#         success "Backup created in $backup_dir"
+#     fi
+# }
 
-# Create configuration files
-create_config_files() {
-    info "Setting up configuration files..."
+# # Create configuration files
+# create_config_files() {
+#     info "Setting up configuration files..."
     
-    # Backup existing configuration
-    backup_existing_config
+#     # Backup existing configuration
+#     backup_existing_config
     
-    # Create config directory if it doesn't exist
-    mkdir -p config
+#     # Create config directory if it doesn't exist
+#     mkdir -p config
     
-    # Create agents.yaml
-    cat > config/agents.yaml << 'EOL'
-research_agent:
-  name: Research Agent
-  role: Research specialist focusing on job market analysis
-  goals:
-    - Thoroughly analyze company culture and requirements
-    - Identify key industry trends and standards
-  backstory: An experienced research analyst with expertise in job market analysis
+#     # Create agents.yaml
+#     cat > config/agents.yaml << 'EOL'
+# research_agent:
+#   name: Research Agent
+#   role: Research specialist focusing on job market analysis
+#   goals:
+#     - Thoroughly analyze company culture and requirements
+#     - Identify key industry trends and standards
+#   backstory: An experienced research analyst with expertise in job market analysis
 
-writer_agent:
-  name: Writer Agent
-  role: Content specialist for job descriptions
-  goals:
-    - Create compelling job descriptions
-    - Ensure clarity and accuracy in content
-  backstory: A professional writer with experience in HR communications
+# writer_agent:
+#   name: Writer Agent
+#   role: Content specialist for job descriptions
+#   goals:
+#     - Create compelling job descriptions
+#     - Ensure clarity and accuracy in content
+#   backstory: A professional writer with experience in HR communications
 
-review_agent:
-  name: Review Agent
-  role: Quality assurance specialist
-  goals:
-    - Ensure accuracy and completeness of job postings
-    - Verify alignment with company culture
-  backstory: An experienced HR professional with expertise in job posting optimization
-EOL
+# review_agent:
+#   name: Review Agent
+#   role: Quality assurance specialist
+#   goals:
+#     - Ensure accuracy and completeness of job postings
+#     - Verify alignment with company culture
+#   backstory: An experienced HR professional with expertise in job posting optimization
+# EOL
 
-    # Create tasks.yaml
-    cat > config/tasks.yaml << 'EOL'
-research_company_culture_task:
-  description: Research and analyze company culture and values
-  expected_output: Detailed analysis of company culture and values
+#     # Create tasks.yaml
+#     cat > config/tasks.yaml << 'EOL'
+# research_company_culture_task:
+#   description: Research and analyze company culture and values
+#   expected_output: Detailed analysis of company culture and values
 
-research_role_requirements_task:
-  description: Research specific role requirements and industry standards
-  expected_output: Comprehensive list of role requirements and qualifications
+# research_role_requirements_task:
+#   description: Research specific role requirements and industry standards
+#   expected_output: Comprehensive list of role requirements and qualifications
 
-draft_job_posting_task:
-  description: Create initial job posting draft
-  expected_output: Complete job posting draft
+# draft_job_posting_task:
+#   description: Create initial job posting draft
+#   expected_output: Complete job posting draft
 
-review_and_edit_job_posting_task:
-  description: Review and optimize job posting
-  expected_output: Final, polished job posting
+# review_and_edit_job_posting_task:
+#   description: Review and optimize job posting
+#   expected_output: Final, polished job posting
 
-industry_analysis_task:
-  description: Analyze industry trends and standards
-  expected_output: Industry analysis report
-EOL
+# industry_analysis_task:
+#   description: Analyze industry trends and standards
+#   expected_output: Industry analysis report
+# EOL
 
-    # Create .env file if it doesn't exist
-    if [ ! -f ".env" ]; then
-        cat > .env << 'EOL'
-# API Keys
-OPENAI_API_KEY=your_openai_api_key_here
-SERPER_API_KEY=your_serper_api_key_here
+#     # Create .env file if it doesn't exist
+#     if [ ! -f ".env" ]; then
+#         cat > .env << 'EOL'
+# # API Keys
+# OPENAI_API_KEY=your_openai_api_key_here
+# SERPER_API_KEY=your_serper_api_key_here
 
-# Configuration
-DEBUG=True
-LOG_LEVEL=INFO
-EOL
-    fi
+# # Configuration
+# DEBUG=True
+# LOG_LEVEL=INFO
+# EOL
+#     fi
 
-    success "Configuration files created"
-}
+#     success "Configuration files created"
+# }
 
 # Main installation process
 main() {
@@ -298,9 +298,9 @@ main() {
     fi
 
     # Set the global Python version to 3.13.0
-    pyenv global 3.13.0
+    pyenv use 3.12.8
 
-    echo "Python 3.13.0 set globally"
+    echo "Python 3.12.8 set globally"
 
     # Install and configure Poetry
     install_poetry
@@ -308,7 +308,7 @@ main() {
     
     # Set up project structure and configuration
     create_project_structure
-    create_config_files
+  #  create_config_files
     
     # Install dependencies
     install_dependencies
@@ -331,3 +331,14 @@ main() {
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     main "$@"
 fi
+
+
+
+# crewai = "^0.11.0"
+# crewai-tools = "^0.0.9"
+# langchain = "^0.1.0"
+# openai = "^1.0.0"
+# python-dotenv = "^1.0.0"
+# PyYAML = "^6.0.1"
+# requests = "^2.31.0"
+# beautifulsoup4 = "^4.12.2"
