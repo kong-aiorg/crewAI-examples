@@ -156,6 +156,11 @@ backup/
 *.backup
 *_backup
 
+backup_*/.env
+backup_*/agents.yaml
+backup_*/tasks.yaml
+
+
 # Miscellaneous
 .directory
 *.retry
