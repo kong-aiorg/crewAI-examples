@@ -1,0 +1,19 @@
+research_company_culture_task:
+  description: Research and analyze company culture and values
+  expected_output: Detailed analysis of company culture and values
+
+research_role_requirements_task:
+  description: Research specific role requirements and industry standards
+  expected_output: Comprehensive list of role requirements and qualifications
+
+draft_job_posting_task:
+  description: Create initial job posting draft
+  expected_output: Complete job posting draft
+
+review_and_edit_job_posting_task:
+  description: Review and optimize job posting
+  expected_output: Final, polished job posting
+
+industry_analysis_task:
+  description: Analyze industry trends and standards
+  expected_output: Industry analysis report
